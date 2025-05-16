@@ -28,8 +28,23 @@ export default function PostulantList() {
   };
 
   const handleDelete = async (id) => {
-    await deletePostulant(id);
-    load();
+    //await deletePostulant(id);
+    //load();
+    if (window.confirm("¿Confirmas que deseas eliminar este postulante?")) {
+      try {
+        const response = await deletePostulant(id);
+        if (response.status === 200) {
+          await load(); // Recargar la lista
+          // Opcional: Mostrar notificación de éxito
+          alert("Postulante eliminado correctamente");
+        } else if (response.status === 404) {
+          alert("El postulante no fue encontrado");
+        }
+      } catch (error) {
+        console.error("Error:", error.response?.data?.error || error.message);
+        alert("Ocurrió un error al eliminar");
+      }
+    }
   };
 
   return (
