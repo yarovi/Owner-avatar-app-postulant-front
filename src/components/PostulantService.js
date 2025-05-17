@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8081/applicant-service/api/postulants";
+const API_URL = "https://134.122.125.240:8081/applicant-service/api/postulants";
 
 export const getAllPostulants = () => axios.get(API_URL);
 export const getPostulant = (id) => axios.get(`${API_URL}/${id}`);
